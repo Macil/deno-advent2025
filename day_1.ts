@@ -13,7 +13,7 @@ function part1(input: string): number {
   let position = 50;
   for (const move of items) {
     position += move;
-    position = (position + 100) % 100;
+    position = (position % 100 + 100) % 100;
 
     if (position === 0) {
       timesAt0 += 1;
