@@ -39,14 +39,56 @@ function part1(input: string): number {
     .reduce((sum, value) => sum + value, 0);
 }
 
-// function part2(input: string): number {
-//   const ranges = parse(input);
-//   throw new Error("TODO");
-// }
+function isInvalidIdPart2(id: number): boolean {
+  const idStr = id.toString();
+  const len = idStr.length;
+
+  if (len < 2) return false;
+
+  return rangeIterator(1, len / 2)
+    .filter((subLen) => len % subLen === 0)
+    .some((subLen) => {
+      const firstSlice = idStr.slice(0, subLen);
+      return rangeIterator(1, len / subLen, { excludeEnd: true })
+        .every((i) => idStr.slice(i * subLen, (i + 1) * subLen) === firstSlice);
+    });
+}
+
+Deno.test("isInvalidIdPart2 part 1 examples", () => {
+  assertEquals(isInvalidIdPart2(9), false);
+  assertEquals(isInvalidIdPart2(10), false);
+  assertEquals(isInvalidIdPart2(11), true);
+  assertEquals(isInvalidIdPart2(55), true);
+  assertEquals(isInvalidIdPart2(555), true); // different from part 1
+  assertEquals(isInvalidIdPart2(5555), true);
+  assertEquals(isInvalidIdPart2(6464), true);
+  assertEquals(isInvalidIdPart2(646), false);
+  assertEquals(isInvalidIdPart2(123123), true);
+  assertEquals(isInvalidIdPart2(123124), false);
+  assertEquals(isInvalidIdPart2(123321), false);
+});
+
+Deno.test("isInvalidIdPart2 new examples", () => {
+  assertEquals(isInvalidIdPart2(123123123), true);
+  assertEquals(isInvalidIdPart2(12312312), false);
+  assertEquals(isInvalidIdPart2(1231231234), false);
+
+  assertEquals(isInvalidIdPart2(1212121212), true);
+
+  assertEquals(isInvalidIdPart2(1111111), true);
+});
+
+function part2(input: string): number {
+  const ranges = parse(input);
+  return Iterator.from(ranges)
+    .flatMap(([start, end]) => rangeIterator(start, end))
+    .filter(isInvalidIdPart2)
+    .reduce((sum, value) => sum + value, 0);
+}
 
 if (import.meta.main) {
   runPart(2025, 2, 1, part1);
-  // runPart(2025, 2, 2, part2);
+  runPart(2025, 2, 2, part2);
 }
 
 const TEST_INPUT = `\
@@ -59,6 +101,6 @@ Deno.test("part1", () => {
   assertEquals(part1(TEST_INPUT), 1227775554);
 });
 
-// Deno.test("part2", () => {
-//   assertEquals(part2(TEST_INPUT), 12);
-// });
+Deno.test("part2", () => {
+  assertEquals(part2(TEST_INPUT), 4174379265);
+});
