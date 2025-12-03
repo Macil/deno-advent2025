@@ -7,25 +7,20 @@ function parse(input: string): string[] {
 }
 
 function highestJoltageFromBank(bank: string, digits: number): number {
-  const result = rangeIterator(9, 0)
-    .map((i) => {
-      const idx = bank.indexOf(i.toString());
-      if (idx === -1) return undefined;
-      const maxValueLength = bank.length - idx;
-      if (maxValueLength < digits) return undefined;
-      if (digits === 1) return i;
-      return i * 10 ** (digits - 1) +
-        highestJoltageFromBank(bank.slice(idx + 1), digits - 1);
-    })
-    .filter((v) => v !== undefined)
-    .take(1)
-    .toArray().at(0);
-  if (result === undefined) {
-    throw new Error(
-      `No valid joltage found for bank ${bank} with digits ${digits}`,
-    );
+  for (const i of rangeIterator(9, 0)) {
+    const idx = bank.indexOf(i.toString());
+    if (idx === -1) continue;
+    const maxValueLength = bank.length - idx;
+    if (maxValueLength < digits) continue;
+    if (digits === 1) {
+      return i;
+    }
+    return i * 10 ** (digits - 1) +
+      highestJoltageFromBank(bank.slice(idx + 1), digits - 1);
   }
-  return result;
+  throw new Error(
+    `No valid joltage found for bank ${bank} with digits ${digits}`,
+  );
 }
 
 function part1(input: string): number {
