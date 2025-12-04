@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@alexreardon/limit-once@0.8": "0.8.0",
     "jsr:@cliffy/command@1.0.0-rc.8": "1.0.0-rc.8",
     "jsr:@cliffy/flags@1.0.0-rc.8": "1.0.0-rc.8",
     "jsr:@cliffy/internal@1.0.0-rc.8": "1.0.0-rc.8",
@@ -13,6 +14,7 @@
     "jsr:@hugoalh/range-iterator@3": "3.0.0",
     "jsr:@korkje/memz@0.2.1": "0.2.1",
     "jsr:@macil/aocd@^2.0.3": "2.0.3",
+    "jsr:@macil/grid@~0.1.1": "0.1.1",
     "jsr:@std/assert@^1.0.16": "1.0.16",
     "jsr:@std/cli@^1.0.6": "1.0.24",
     "jsr:@std/fmt@~1.0.2": "1.0.8",
@@ -22,6 +24,9 @@
     "npm:@types/node@*": "24.2.0"
   },
   "jsr": {
+    "@alexreardon/limit-once@0.8.0": {
+      "integrity": "5d074aa6470a789b90ff0c108f0a1bb32815a1e16e7fb5e0f14c571e0afb8d0e"
+    },
     "@cliffy/command@1.0.0-rc.8": {
       "integrity": "758147790797c74a707e5294cc7285df665422a13d2a483437092ffce40b5557",
       "dependencies": [
@@ -90,6 +95,12 @@
         "jsr:@std/path"
       ]
     },
+    "@macil/grid@0.1.1": {
+      "integrity": "04ff8cda82cdcccd8b85fb3f55b22f8b05e34f9e291e51d3d920df4b6480bef3",
+      "dependencies": [
+        "jsr:@alexreardon/limit-once"
+      ]
+    },
     "@std/assert@1.0.16": {
       "integrity": "6a7272ed1eaa77defe76e5ff63ca705d9c495077e2d5fd0126d2b53fc5bd6532",
       "dependencies": [
@@ -130,6 +141,7 @@
     "dependencies": [
       "jsr:@hugoalh/range-iterator@3",
       "jsr:@macil/aocd@^2.0.3",
+      "jsr:@macil/grid@~0.1.1",
       "jsr:@std/assert@^1.0.16"
     ]
   }
