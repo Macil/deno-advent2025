@@ -5,7 +5,7 @@ import { allNeighbors, CharacterGrid } from "@macil/grid";
 function part1(input: string): number {
   const grid = CharacterGrid.fromString(input);
   return grid.valuesWithLocations()
-    .filter(({ location }) => grid.get(location) === "@")
+    .filter(({ value }) => value === "@")
     .filter(({ location }) =>
       Iterator.from(allNeighbors())
         .map((neighborVec) => location.add(neighborVec))
