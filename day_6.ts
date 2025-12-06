@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { runPart } from "@macil/aocd";
-import { ArrayGrid, Location } from "@macil/grid";
+import { ArrayGrid, CharacterGrid, Location } from "@macil/grid";
 import rangeIterator from "@hugoalh/range-iterator";
 
 type Operation = "+" | "*";
@@ -42,14 +42,52 @@ function part1(input: string): number {
     ).reduce((a, b) => a + b, 0);
 }
 
-// function part2(input: string): number {
-//   const problems = parse(input);
-//   throw new Error("TODO");
-// }
+function parseP2(input: string): Problem[] {
+  const inputLines = input.trimEnd().split("\n");
+  const longestLineLength = Math.max(
+    ...inputLines.map((line) => line.length),
+  );
+
+  const grid = CharacterGrid.fromString(
+    inputLines.map((line) => line.padEnd(longestLineLength, " ")).join("\n"),
+  );
+  const problems: Problem[] = [];
+  let currentNumbers: number[] = [];
+  for (const column of rangeIterator(grid.dimensions.columns - 1, 0)) {
+    const columnString = rangeIterator(0, grid.dimensions.rows - 2)
+      .map((row) => grid.get(new Location(row, column))!)
+      .toArray()
+      .join("").trim();
+    if (columnString.length !== 0) {
+      currentNumbers.push(Number(columnString));
+    }
+
+    const operation = grid.get(new Location(grid.dimensions.rows - 1, column))!;
+    if (["+", "*"].includes(operation)) {
+      problems.push({
+        numbers: currentNumbers,
+        operation: operation as Operation,
+      });
+      currentNumbers = [];
+    }
+  }
+  return problems;
+}
+
+function part2(input: string): number {
+  const problems = parseP2(input);
+  return problems
+    .map((problem) =>
+      problem.numbers.reduce(
+        problem.operation === "+" ? (a, b) => a + b : (a, b) => a * b,
+        problem.operation === "+" ? 0 : 1,
+      )
+    ).reduce((a, b) => a + b, 0);
+}
 
 if (import.meta.main) {
   runPart(2025, 6, 1, part1);
-  // runPart(2025, 6, 2, part2);
+  runPart(2025, 6, 2, part2);
 }
 
 const TEST_INPUT = `\
@@ -72,6 +110,15 @@ Deno.test("part1", () => {
   assertEquals(part1(TEST_INPUT), 4277556);
 });
 
-// Deno.test("part2", () => {
-//   assertEquals(part2(TEST_INPUT), 12);
-// });
+Deno.test("parseP2", () => {
+  assertEquals(parseP2(TEST_INPUT), [
+    { numbers: [4, 431, 623], operation: "+" },
+    { numbers: [175, 581, 32], operation: "*" },
+    { numbers: [8, 248, 369], operation: "+" },
+    { numbers: [356, 24, 1], operation: "*" },
+  ]);
+});
+
+Deno.test("part2", () => {
+  assertEquals(part2(TEST_INPUT), 3263827);
+});
