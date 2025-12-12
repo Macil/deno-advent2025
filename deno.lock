@@ -15,8 +15,10 @@
     "jsr:@korkje/memz@0.2.1": "0.2.1",
     "jsr:@macil/aocd@^2.0.3": "2.0.3",
     "jsr:@macil/grid@~0.1.2": "0.1.2",
+    "jsr:@std/assert@^1.0.13": "1.0.16",
     "jsr:@std/assert@^1.0.16": "1.0.16",
     "jsr:@std/cli@^1.0.6": "1.0.24",
+    "jsr:@std/data-structures@^1.0.9": "1.0.9",
     "jsr:@std/fmt@~1.0.2": "1.0.8",
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/path@^1.0.6": "1.1.3",
@@ -110,6 +112,12 @@
     "@std/cli@1.0.24": {
       "integrity": "b655a5beb26aa94f98add6bc8889f5fb9bc3ee2cc3fc954e151201f4c4200a5e"
     },
+    "@std/data-structures@1.0.9": {
+      "integrity": "033d6e17e64bf1f84a614e647c1b015fa2576ae3312305821e1a4cb20674bb4d",
+      "dependencies": [
+        "jsr:@std/assert@^1.0.13"
+      ]
+    },
     "@std/fmt@1.0.8": {
       "integrity": "71e1fc498787e4434d213647a6e43e794af4fd393ef8f52062246e06f7e372b7"
     },
@@ -142,7 +150,8 @@
       "jsr:@hugoalh/range-iterator@3",
       "jsr:@macil/aocd@^2.0.3",
       "jsr:@macil/grid@~0.1.2",
-      "jsr:@std/assert@^1.0.16"
+      "jsr:@std/assert@^1.0.16",
+      "jsr:@std/data-structures@^1.0.9"
     ]
   }
 }
