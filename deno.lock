@@ -23,7 +23,9 @@
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/path@^1.0.6": "1.1.3",
     "jsr:@std/text@~1.0.7": "1.0.16",
-    "npm:@types/node@*": "24.2.0"
+    "npm:@easy-data-structure-js/union-find@1": "1.0.0",
+    "npm:@types/node@*": "24.2.0",
+    "npm:mnemonist@~0.40.3": "0.40.3"
   },
   "jsr": {
     "@alexreardon/limit-once@0.8.0": {
@@ -135,11 +137,23 @@
     }
   },
   "npm": {
+    "@easy-data-structure-js/union-find@1.0.0": {
+      "integrity": "sha512-CASCnlhfkcs0T4RuU7cjestooha0Bpg/vpkoCxCgVdXPK/jOaGBTpjss6Ffa5URu+67hPxSVNRrAZos6sF43kQ=="
+    },
     "@types/node@24.2.0": {
       "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
       "dependencies": [
         "undici-types"
       ]
+    },
+    "mnemonist@0.40.3": {
+      "integrity": "sha512-Vjyr90sJ23CKKH/qPAgUKicw/v6pRoamxIEDFOF8uSgFME7DqPRpHgRTejWVjkdGg5dXj0/NyxZHZ9bcjH+2uQ==",
+      "dependencies": [
+        "obliterator"
+      ]
+    },
+    "obliterator@2.0.5": {
+      "integrity": "sha512-42CPE9AhahZRsMNslczq0ctAEtqk8Eka26QofnqC346BZdHDySk3LWka23LI7ULIw11NmltpiLagIq8gBozxTw=="
     },
     "undici-types@7.10.0": {
       "integrity": "sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag=="
@@ -151,7 +165,9 @@
       "jsr:@macil/aocd@^2.0.3",
       "jsr:@macil/grid@~0.1.2",
       "jsr:@std/assert@^1.0.16",
-      "jsr:@std/data-structures@^1.0.9"
+      "jsr:@std/data-structures@^1.0.9",
+      "npm:@easy-data-structure-js/union-find@1",
+      "npm:mnemonist@~0.40.3"
     ]
   }
 }
