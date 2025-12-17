@@ -1,7 +1,7 @@
 import type { Bool, Context, Expr, Model, Solver } from "@macil/z3-solver";
 
 function generateConstraint<Name extends string>(
-  z3: Context<Name>,
+  Z3: Context<Name>,
   model: Model<Name>,
   variables: ReadonlyArray<Expr<Name>>,
 ): Bool<Name> {
@@ -13,7 +13,7 @@ function generateConstraint<Name extends string>(
     })
     .reduce(
       (acc, curr) => acc.or(curr),
-      z3.Bool.val(false),
+      Z3.Bool.val(false),
     );
 }
 
@@ -24,13 +24,13 @@ function generateConstraint<Name extends string>(
  * Consider using it with `take` or similar to limit the number of solutions.
  */
 export async function* getSolutions<Name extends string>(
-  z3: Context<Name>,
+  Z3: Context<Name>,
   solver: Solver<Name>,
   variables: ReadonlyArray<Expr<Name>>,
 ): AsyncGenerator<Model<Name>> {
   while (await solver.check() === "sat") {
     const model = solver.model();
-    const counterExample = generateConstraint(z3, model, variables);
+    const counterExample = generateConstraint(Z3, model, variables);
     yield model;
     solver.add(counterExample);
   }
