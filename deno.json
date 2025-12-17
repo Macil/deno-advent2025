@@ -11,6 +11,7 @@
   "imports": {
     "@easy-data-structure-js/union-find": "npm:@easy-data-structure-js/union-find@^1.0.0",
     "@hugoalh/range-iterator": "jsr:@hugoalh/range-iterator@^3.0.0",
+    "@hugoalh/setation": "jsr:@hugoalh/setation@^2.0.1",
     "@macil/aocd": "jsr:@macil/aocd@^2.0.3",
     "@macil/grid": "jsr:@macil/grid@^0.1.2",
     "@macil/z3-solver": "jsr:@macil/z3-solver@^1.0.4",

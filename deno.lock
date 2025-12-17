@@ -12,6 +12,7 @@
     "jsr:@cross/runtime@1": "1.2.1",
     "jsr:@cross/utils@0.7": "0.7.1",
     "jsr:@hugoalh/range-iterator@3": "3.0.0",
+    "jsr:@hugoalh/setation@^2.0.1": "2.0.1",
     "jsr:@korkje/memz@0.2.1": "0.2.1",
     "jsr:@macil/aocd@^2.0.3": "2.0.3",
     "jsr:@macil/grid@~0.1.2": "0.1.2",
@@ -87,6 +88,9 @@
     },
     "@hugoalh/range-iterator@3.0.0": {
       "integrity": "6e72977a1f3f337ba711f4189504acb294d889edd347c185190490a1d6ee5973"
+    },
+    "@hugoalh/setation@2.0.1": {
+      "integrity": "3bf0d87cd39a51103da1f7de66c6ea1f6b13d3f2df9bce4a7f31cb10b4df5ab7"
     },
     "@korkje/memz@0.2.1": {
       "integrity": "ea68db152c9454143a8440edfd88ec7710b73a9c334a81f4299ef0cd6de5c25f"
@@ -185,6 +189,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@hugoalh/range-iterator@3",
+      "jsr:@hugoalh/setation@^2.0.1",
       "jsr:@macil/aocd@^2.0.3",
       "jsr:@macil/grid@~0.1.2",
       "jsr:@macil/z3-solver@^1.0.4",
