@@ -121,15 +121,11 @@ function part2(input: string): number {
             `Invalid input: only horizontal and vertical moves are allowed (${lastLocation} -> ${loc})`,
           );
         }
-        const stepVector = loc.subtract(lastLocation);
-        const stepSignVector = new Vector(
-          Math.sign(stepVector.rows),
-          Math.sign(stepVector.columns),
-        );
-        let currentLocation = lastLocation.add(stepSignVector);
+        const stepSignVector = loc.subtract(lastLocation).sign();
+        const currentLocation = lastLocation.add(stepSignVector);
         while (!currentLocation.equals(loc)) {
           grid.set(currentLocation, true);
-          currentLocation = currentLocation.add(stepSignVector);
+          currentLocation.addInPlace(stepSignVector);
         }
       }
       grid.set(loc, true);
