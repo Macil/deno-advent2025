@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { runPart } from "@macil/aocd";
-import { ArrayGrid, CharacterGrid, Location } from "@macil/grid";
+import { ArrayGrid, CharacterGrid, GridLocation } from "@macil/grid";
 import rangeIterator from "@hugoalh/range-iterator";
 
 type Operation = "+" | "*";
@@ -22,10 +22,10 @@ function parse(input: string): Problem[] {
   return rangeIterator(0, grid.dimensions.columns - 1)
     .map((col): Problem => ({
       numbers: rangeIterator(0, grid.dimensions.rows - 2)
-        .map((row) => grid.get(new Location(row, col)) as number)
+        .map((row) => grid.get(new GridLocation(row, col)) as number)
         .toArray(),
       operation: grid.get(
-        new Location(grid.dimensions.rows - 1, col),
+        new GridLocation(grid.dimensions.rows - 1, col),
       ) as Operation,
     }))
     .toArray();
@@ -55,14 +55,16 @@ function parseP2(input: string): Problem[] {
   let currentNumbers: number[] = [];
   for (const column of rangeIterator(grid.dimensions.columns - 1, 0)) {
     const columnString = rangeIterator(0, grid.dimensions.rows - 2)
-      .map((row) => grid.get(new Location(row, column))!)
+      .map((row) => grid.get(new GridLocation(row, column))!)
       .toArray()
       .join("").trim();
     if (columnString.length !== 0) {
       currentNumbers.push(Number(columnString));
     }
 
-    const operation = grid.get(new Location(grid.dimensions.rows - 1, column))!;
+    const operation = grid.get(
+      new GridLocation(grid.dimensions.rows - 1, column),
+    )!;
     if (["+", "*"].includes(operation)) {
       problems.push({
         numbers: currentNumbers,

@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { runPart } from "@macil/aocd";
-import { CharacterGrid, Location } from "@macil/grid";
+import { CharacterGrid, GridLocation } from "@macil/grid";
 import rangeIterator from "@hugoalh/range-iterator";
 import { BinaryHeap } from "@std/data-structures/binary-heap";
 import { ascend } from "@std/data-structures/comparators";
@@ -20,15 +20,15 @@ function part1(input: string): number {
       beamPosition.row,
       grid.dimensions.rows - 1,
     )
-      .map((row) => new Location(row, beamPosition.column))
+      .map((row) => new GridLocation(row, beamPosition.column))
       .find((loc) => grid.get(loc) === "^");
     if (hitSplitter) {
       const hitSplitterKey = hitSplitter.toString();
       if (!activatedSplitters.has(hitSplitterKey)) {
         activatedSplitters.add(hitSplitterKey);
         beamQueue.push(...[
-          new Location(hitSplitter.row, hitSplitter.column - 1),
-          new Location(hitSplitter.row, hitSplitter.column + 1),
+          new GridLocation(hitSplitter.row, hitSplitter.column - 1),
+          new GridLocation(hitSplitter.row, hitSplitter.column + 1),
         ].filter((loc) => grid.isInBounds(loc)));
       }
     }
@@ -45,7 +45,7 @@ function part2(input: string): number {
   }
   const activationsBySplitter = new Map<string, number>();
   const beamQueue = BinaryHeap.from<
-    { location: Location; sourceSplitter?: Location }
+    { location: GridLocation; sourceSplitter?: GridLocation }
   >(
     [{ location: startPosition, sourceSplitter: undefined }],
     { compare: (a, b) => ascend(a.location.row, b.location.row) },
@@ -63,7 +63,7 @@ function part2(input: string): number {
       entry.location.row,
       grid.dimensions.rows - 1,
     )
-      .map((row) => new Location(row, entry.location.column))
+      .map((row) => new GridLocation(row, entry.location.column))
       .find((loc) => grid.get(loc) === "^");
     if (hitSplitter) {
       const hitSplitterKey = hitSplitter.toString();
@@ -72,11 +72,11 @@ function part2(input: string): number {
       if (splitterActivations === undefined) {
         beamQueue.push(...[
           {
-            location: new Location(hitSplitter.row, hitSplitter.column - 1),
+            location: new GridLocation(hitSplitter.row, hitSplitter.column - 1),
             sourceSplitter: hitSplitter,
           },
           {
-            location: new Location(hitSplitter.row, hitSplitter.column + 1),
+            location: new GridLocation(hitSplitter.row, hitSplitter.column + 1),
             sourceSplitter: hitSplitter,
           },
         ].filter((entry) => grid.isInBounds(entry.location)));

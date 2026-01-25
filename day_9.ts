@@ -1,14 +1,21 @@
 import { assertEquals } from "@std/assert";
 import { runPart } from "@macil/aocd";
-import { ArrayGrid, Location, orthogonalNeighbors, Vector } from "@macil/grid";
+import {
+  ArrayGrid,
+  GridLocation,
+  orthogonalNeighbors,
+  Vector,
+} from "@macil/grid";
 import { combinationSet } from "@hugoalh/setation/set";
 import { BidirectionalMap } from "@std/data-structures/unstable-bidirectional-map";
 
-function parse(input: string): Location[] {
-  return input.trimEnd().split("\n").map((line) => Location.fromString(line));
+function parse(input: string): GridLocation[] {
+  return input.trimEnd().split("\n").map((line) =>
+    GridLocation.fromString(line)
+  );
 }
 
-function rectangleArea(corner1: Location, corner2: Location): number {
+function rectangleArea(corner1: GridLocation, corner2: GridLocation): number {
   const width = Math.abs(corner1.column - corner2.column) + 1;
   const height = Math.abs(corner1.row - corner2.row) + 1;
   return width * height;
@@ -77,13 +84,13 @@ function part2(input: string): number {
     redTiles.map((loc) => loc.column),
   );
 
-  function uncompress(loc: Location): Location {
+  function uncompress(loc: GridLocation): GridLocation {
     const originalRow = compressedRowMap.getReverse(loc.row);
     const originalColumn = compressedColumnMap.getReverse(loc.column);
     if (originalRow === undefined || originalColumn === undefined) {
-      throw new Error(`Location ${loc} cannot be uncompressed`);
+      throw new Error(`GridLocation ${loc} cannot be uncompressed`);
     }
-    return new Location(originalRow, originalColumn);
+    return new GridLocation(originalRow, originalColumn);
   }
 
   const dimensions = new Vector(compressedRowCount, compressedColumnCount);
@@ -92,7 +99,7 @@ function part2(input: string): number {
   const grid = ArrayGrid.createWithInitialValue(dimensions, false);
 
   const redTilesAsCompressed = redTiles.map((loc) =>
-    new Location(
+    new GridLocation(
       compressedRowMap.get(loc.row)!,
       compressedColumnMap.get(loc.column)!,
     )
@@ -104,7 +111,7 @@ function part2(input: string): number {
       return 0;
     }
 
-    let lastLocation: Location = redTilesAsCompressed.at(-1)!;
+    let lastLocation: GridLocation = redTilesAsCompressed.at(-1)!;
     for (const loc of redTilesAsCompressed) {
       if (lastLocation) {
         if (
@@ -137,7 +144,7 @@ function part2(input: string): number {
       dimensions,
       false,
     );
-    const loc = new Location(0, 0);
+    const loc = new GridLocation(0, 0);
     for (loc.row = 0; loc.row < dimensions.rows; loc.row++) {
       for (loc.column = 0; loc.column < dimensions.columns; loc.column++) {
         if (grid.get(loc) || floodFilledLocations.get(loc)) {
@@ -148,7 +155,7 @@ function part2(input: string): number {
         // Locations to check each neighbor and to fill if no escape happens.
         // Locations should be marked as a flood-filled location when added
         // here.
-        const touched: Location[] = [loc];
+        const touched: GridLocation[] = [loc];
         floodFilledLocations.set(loc, true);
         // Use classic for-loop to allow pushing to the array while iterating.
         for (let i = 0; i < touched.length; i++) {
@@ -183,7 +190,7 @@ function part2(input: string): number {
 
   // {
   //   console.log("Final grid:");
-  //   const loc = new Location(0, 0);
+  //   const loc = new GridLocation(0, 0);
   //   for (loc.row = 0; loc.row < dimensions.rows; loc.row++) {
   //     let line = "";
   //     for (loc.column = 0; loc.column < dimensions.columns; loc.column++) {
@@ -204,7 +211,7 @@ function part2(input: string): number {
       const maxRow = Math.max(loc1.row, loc2.row);
       const minColumn = Math.min(loc1.column, loc2.column);
       const maxColumn = Math.max(loc1.column, loc2.column);
-      const loc = new Location(0, 0);
+      const loc = new GridLocation(0, 0);
       for (loc.row = minRow; loc.row <= maxRow; loc.row++) {
         for (loc.column = minColumn; loc.column <= maxColumn; loc.column++) {
           if (!grid.get(loc)) {
