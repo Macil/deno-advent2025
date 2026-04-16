@@ -18,5 +18,13 @@
     "@std/assert": "jsr:@std/assert@^1.0.17",
     "@std/data-structures": "jsr:@std/data-structures@^1.0.10",
     "mnemonist": "npm:mnemonist@^0.40.3"
+  },
+  "minimumDependencyAge": {
+    "age": "P3D",
+    "exclude": [
+      "jsr:@macil/aocd",
+      "jsr:@macil/grid",
+      "jsr:@macil/z3-solver"
+    ]
   }
 }
