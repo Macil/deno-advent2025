@@ -16,10 +16,10 @@
     "@hugoalh/setation": "jsr:@hugoalh/setation@^2.0.1",
     "@macil/aocd": "jsr:@macil/aocd@^2.0.3",
     "@macil/grid": "jsr:@macil/grid@^0.2.2",
-    "@macil/z3-solver": "jsr:@macil/z3-solver@^1.0.4",
-    "@std/assert": "jsr:@std/assert@^1.0.17",
-    "@std/data-structures": "jsr:@std/data-structures@^1.0.10",
-    "mnemonist": "npm:mnemonist@^0.40.3"
+    "@macil/z3-solver": "jsr:@macil/z3-solver@^1.0.5",
+    "@std/assert": "jsr:@std/assert@^1.0.19",
+    "@std/data-structures": "jsr:@std/data-structures@^1.0.11",
+    "mnemonist": "npm:mnemonist@^0.40.4"
   },
   "minimumDependencyAge": {
     "age": "P3D",
