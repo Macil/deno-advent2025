@@ -6,7 +6,9 @@
       "**/*_test.*",
       "**/test.*",
       "**/__tests__/**"
-    ]
+    ],
+    "sanitizeOps": true,
+    "sanitizeResources": true
   },
   "imports": {
     "@easy-data-structure-js/union-find": "npm:@easy-data-structure-js/union-find@^1.0.0",
